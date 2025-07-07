@@ -1,5 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+from ext import db
 
 class Medico(db.Model):
     __tablename__ = 'medicos'
