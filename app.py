@@ -1,6 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request, session, flash
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash # PARA PROTEGER LAS CONTRASEÑAS A FUTURO
+import os
+from modelos import Medico, Paciente, Cita, Diagnostico, Rol
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(basedir, "database", "app.db")}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'dev'
+db = SQLAlchemy(app)
+
 
 @app.route('/')
 def home():
